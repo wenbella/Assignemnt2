@@ -1,0 +1,44 @@
+body {
+    padding:20px;
+}
+
+div {
+    padding:8px 10px;
+    background-color:#E6F9FA;
+    width:35%;
+    float:left;
+
+}
+
+td{
+    width:200px;
+}
+
+table{
+    margin-left:20px;
+}
+
+#lowerBoundsDiv{
+    height:420px;
+}
+
+#lowerBoundsDiv tr{
+    height:32px;
+}
+
+#histogramDiv{
+    margin-left:20px;
+    height:300px;
+}
+
+#histogramDiv tr {
+    height:23px;
+}
+
+.title{
+    color:red;
+}
+
+input{
+    width:80px;
+}
