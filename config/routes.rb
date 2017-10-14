@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+
+  resources :courses
+  resources :enrolls
+  resources :students
   resources :widgets
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -7,6 +12,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   root 'welcome#index'
+  get '/histogram', :to =>redirect('/histogram.html')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

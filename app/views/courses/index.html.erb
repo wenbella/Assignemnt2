@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<div id="listing">
+
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.course_id %></td>
+        <td><%= course.description %></td>
+        <td>
+          <%= link_to 'Show', course %>
+          <%= link_to 'Edit', edit_course_path(course) %> 
+          <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course', new_course_path %>
+
+<br>
+<br>
+
+<%= link_to 'View All Students', :controller =>"students" %> |
+<%= link_to 'View All Enrollments', :controller =>"enrolls" %>
+</div>

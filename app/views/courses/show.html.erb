@@ -1,0 +1,53 @@
+<script>
+  grades = <%= @eGrades.to_json %>;
+  for(var i=0; i<(grades.length); i++) {
+    grades[i] = parseFloat(grades[i]);
+  }
+</script>
+
+<div id="listing">
+<p id="notice"><%= notice %></p>
+<br>
+<p id="name">
+  <strong>Course:</strong>
+  <%= @course.course_id %>
+</p>
+
+<p id="desc">
+  <strong>Description:</strong>
+  <br>
+  <%= @course.description %>
+</p>
+<%= link_to 'Edit', edit_course_path(@course) %>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Course</th>
+      <th>Percentage</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <br>
+  <tbody>
+    <% @enrolls.each do |enroll| %>
+      <tr>
+        <td><%= enroll.student_id %></td>
+        <td><%= enroll.course_id %></td>
+        <td><%= enroll.percentage %>%</td>
+        <td><%= enroll.lettergrade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', courses_path %>
+<input  type="button"
+        onclick="location.href='/histogram';"
+        value="Assign Grades" />
+</div>

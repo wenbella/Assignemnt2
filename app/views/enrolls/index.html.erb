@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div id="listing">
+<!-- <h1>Listing Enrolls</h1> -->
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Course</th>
+      <th>Percentage</th>
+      <th>Letter Grade</th>
+      <th>            </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @enrolls.each do |enroll| %>
+      <tr>
+        <td><%= enroll.student_id %></td>
+        <td><%= enroll.course_id %></td>
+        <td><%= enroll.percentage %>%</td>
+        <td><%= enroll.lettergrade %></td>
+        <td>
+          <%= link_to 'Show', enroll %>
+          <%= link_to 'Edit', edit_enroll_path(enroll) %>
+          <%= link_to 'Destroy', enroll, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Enroll', new_enroll_path %>
+
+<br>
+<br>
+
+<%= link_to 'View All Courses', :controller =>"courses" %> |
+<%= link_to 'View All Students', :controller =>"students" %>
+</div>

@@ -1,44 +1,91 @@
-body {
-    padding:20px;
+body{
+  height: 100%;
+  margin: 0;
+  font-size: 100%;
 }
-
-div {
-    padding:8px 10px;
-    background-color:#E6F9FA;
-    width:35%;
-    float:left;
-
+div#main{
+  min-height: 100%;
+  width: 1000px;
+  margin-left:auto;
+  margin-right: auto;
+  padding-top: 30px;
+  padding-bottom: 150px;
+  background-color: white;
 }
-
+h1 {
+  font-family: "Arial", sans-serif;
+  padding-bottom: 20px;
+}
+table#data{
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #c8d8ea;
+  border-collapse: collapse;
+  align-content: left;
+}
+th{
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  vertical-align: top;
+  font-family: serif;
+  color: #d51616;
+  font-size: 18px;
+  text-align: left;
+}
+tr#h:hover {
+  background-color: #dee9f2;
+}
 td{
-    width:200px;
+  text-align: left;
 }
-
-table{
-    margin-left:20px;
+td#out{
+  vertical-align: top;
 }
-
-#lowerBoundsDiv{
-    height:420px;
+td#lba {
+  vertical-align: center;
+  padding-left: 45px;
+  padding-bottom: 28px;
 }
-
-#lowerBoundsDiv tr{
-    height:32px;
+td#lbb {
+  vertical-align: center;
+  padding-right: 10px;
+  padding-bottom: 28px;
 }
-
-#histogramDiv{
-    margin-left:20px;
-    height:300px;
+td#h {
+  vertical-align: center;
+  padding-left: 45px;
+  padding-right: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
-
-#histogramDiv tr {
-    height:23px;
+td#ha {
+  vertical-align: center;
+  padding-left: 45px;
+  padding-bottom: 7px;
 }
-
-.title{
-    color:red;
+td#hb {
+  vertical-align: center;
+  padding-right: 10px;
+  padding-bottom: 7px;
 }
-
+td#last{
+  padding-left: 20px;
+  padding-bottom: 40px;
+}
+td#indent{
+  padding-left: 20px;
+}
 input{
-    width:80px;
+  float: left;
+  text-align: right;
+}
+span{
+  color: grey;
+  background-color: pink;
+}
+span#overlap, span#numCheck{
+  color: red;
+  background-color: #edf5f5;
 }

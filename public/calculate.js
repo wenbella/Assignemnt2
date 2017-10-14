@@ -1,120 +1,316 @@
-// Initialize the arrays
-var grades = [65.95, 56.98, 78.62, 96.1, 90.3, 72.24, 92.34, 60.00, 81.43, 86.22, 88.33, 9.03,49.93, 52.34, 53.11, 50.10, 88.88, 55.32, 55.69, 61.68, 70.44, 70.54, 90.0, 71.11, 80.01];
-var lowerBounds = [['Max',100.00,0],['A+',95.00,0],['A',90.00,0],['A-',85.00,0],['B+',80.00,0],['B',75.00,0],['B-',70.00,0],['C+',65.00,0],['C',60.00,0],['C-',55.00,0],['D',50.00,0],['F',0.00,0]];
+var grades = [65.95, 56.98, 78.62, 96.10, 90.3, 72.24, 92.34];
 
-function insertNewBoundRow(tableId, level,lowerBound, rowIndex){
-    var tableRef = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+var maxVal = 100.00;
 
-    // Insert a row in the table at the last row
-    var newRow = tableRef.insertRow(tableRef.rows.length);
-    var index = 0;
+var A1Val = 95.00;
+var A2Val = 90.00;
+var A3Val = 85.00;
 
-    // Insert level cell
-    var levelCell = newRow.insertCell(index++);
-    var levelNode = document.createTextNode(level);
-    levelCell.appendChild(levelNode);
+var B1Val = 80.00;
+var B2Val = 75.00;
+var B3Val = 70.00;
 
-    // Insert bound cell
-    var boundCell = newRow.insertCell(index++);
-    var boundNode = document.createElement('input');
-    boundNode.type = 'text';
-    boundNode.value = parseFloat(Math.round(lowerBound * 100) / 100).toFixed(2);
-    boundCell.appendChild(boundNode);
+var C1Val = 65.00;
+var C2Val = 60.00;
+var C3Val = 55.00;
 
-    //bind input box text changed event
-    boundNode.onchange = (e)=>{
-        var newVal = parseFloat(Math.round(e.target.value * 100) / 100).toFixed(2)
-        var isValid = false;
-        if(newVal){
-            switch(rowIndex){
-                case 0: isValid = newVal > parseFloat(lowerBounds[rowIndex+1][1])? true: false; break;
-                case lowerBounds.length -1: isValid = newVal > 0 && newVal < parseFloat(lowerBounds[rowIndex-1][1])? true: false; break;
-                default:isValid = newVal < parseFloat(lowerBounds[rowIndex-1][1]) && newVal > parseFloat(lowerBounds[rowIndex+1][1])? true: false;break;
-            }
-        }
+var DVal = 50.00;
+var FVal = 0.00;
 
-        if(isValid){
-            e.target.value = newVal;
-            lowerBounds[rowIndex][1] = newVal;
-            distribute();
-            renderHistogram();
-        }else{
-            alert('invalid input!');
-            //put back the original value
-            e.target.value = parseFloat(Math.round(lowerBounds[rowIndex][1] * 100) / 100).toFixed(2);
-        }
+var vals = [maxVal, A1Val, A2Val, A3Val, B1Val, B2Val, B3Val,
+            C1Val, C2Val, C3Val, DVal, FVal];
+
+var letter = ["A+", "A", "A-", "B+", "B", "B-",
+              "C+", "C", "C-", "D", "F"];
+
+function overlapCheck() {
+  var overlap = document.getElementById("overlap");
+
+  for(var i=0; i<((vals.length) - 1); i++) {
+    if(vals[i] < vals[i+1]){
+      overlap.innerText = "\n Warning! \n There is overlap in the lower bounds! \n Resulting histogram may be inaccurate. \n";
+      return;
     }
+  }
+  overlap.innerText = "";
 }
 
-function insertNewHistogramRow(tableId, level,count, rowIndex){
-    var tableRef = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+function numericCheck(val){
+  var numCheck = document.getElementById("numCheck");
 
-        // Insert a row in the table at the last row
-        var newRow = tableRef.insertRow(tableRef.rows.length);
-        var index = 0;
-
-        // Insert level cell
-        var levelCell = newRow.insertCell(index++);
-        var levelNode = document.createTextNode(level);
-        levelCell.appendChild(levelNode);
-
-        // Insert histogram cell
-        var hisCell = newRow.insertCell(index++);
-        var CountO = count==0?'-':'';
-        for(i=0;i<count;i++){
-            CountO += 'O'
-        }
-
-        var hisNode = document.createTextNode(CountO);
-        hisCell.appendChild(hisNode);
+  if(isNaN(val) == true){
+    numCheck.innerText = "\n Warning! Please enters numbers only. \n";
+  }
+  else{
+    numCheck.innerText = "";
+  }
 }
 
-function distribute(){
-    //Init the original count to 0
-    for(boundIndex=0;boundIndex<lowerBounds.length;boundIndex++){
-        lowerBounds[boundIndex][2] = 0;
+function lengthO(low, up) {
+  var length = "";
+  var count = 0;
+  for(var i=0; i<grades.length; i++) {
+    if((grades[i] >= low) && (grades[i] < up)) {
+      if(count%2 == 0){
+        length = length + "|^v^|";
+      }
+      else{
+        length = length + "|^u^|";
+      }
+      count++;
     }
-
-    for(gradeIndex=0;gradeIndex<grades.length;gradeIndex++){
-        var grade = grades[gradeIndex];
-
-        for(boundIndex=0;boundIndex<lowerBounds.length;boundIndex++){
-            // use '>' in case that hardcode grade is greater than the max value, although it doesn't make sense
-            if(grade >= lowerBounds[0][1]){
-                ++lowerBounds[1][2];
-                break;
-            }
-
-            if(boundIndex > 0 && grade >= lowerBounds[boundIndex][1]){
-                ++lowerBounds[boundIndex][2];
-                break;
-            }
-        }
-    }
+  }
+  return length;
 }
 
-function renderHistogram(){
-    var trs = document.getElementById('histogramTable').getElementsByTagName('tr');
-    for(i=0;i<trs.length; i++){
-        var countTd = trs[i].getElementsByTagName('td')[1];
-        var count = lowerBounds[i+1][2];
-        var CountO = count==0?'-':'';
-        for(j=0;j<count;j++){
-            CountO += 'O';
-        }
-        countTd.innerHTML = CountO;
-    }
+function initHistogram(){
+  grades = <%= @eGrades.to_json %>;
+
+  for(var i=0; i<(grades.length); i++) {
+    grades[i] = parseFloat(grades[i]);
+  }
+
+  var length = lengthO(vals[1], vals[0]);
+  var length2 = lengthO(vals[2], vals[1]);
+
+  var A1In = document.getElementById("A1In");
+  A1In.innerText = length;
+  var A2In = document.getElementById("A2In");
+  A2In.innerText = length2;
+
+  length = lengthO(vals[3], vals[2]);
+  length2 = lengthO(vals[4], vals[3]);
+
+  var A3In = document.getElementById("A3In");
+  A3In.innerText = length;
+  var B1In = document.getElementById("B1In");
+  B1In.innerText = length2;
+
+  length = lengthO(vals[5], vals[4]);
+  length2 = lengthO(vals[6], vals[5]);
+
+  var B2In = document.getElementById("B2In");
+  B2In.innerText = length;
+  var B3In = document.getElementById("B3In");
+  B3In.innerText = length2;
+
+  length = lengthO(vals[7], vals[6]);
+  length2 = lengthO(vals[8], vals[7]);
+
+  var C1In = document.getElementById("C1In");
+  C1In.innerText = length;
+  var C2In = document.getElementById("C2In");
+  C2In.innerText = length2;
+
+  length = lengthO(vals[9], vals[8]);
+  length2 = lengthO(vals[10], vals[9]);
+
+  var C3In = document.getElementById("C3In");
+  C3In.innerText = length;
+  var DIn = document.getElementById("DIn");
+  DIn.innerText = length2;
+
+  length = lengthO(vals[11], vals[10]);
+
+  var FIn = document.getElementById("FIn");
+  FIn.innerText = length;
 }
 
-function init(){
-    distribute();
-    for(index=0;index<lowerBounds.length;index++){
-        if(index > 0){
-            insertNewHistogramRow('histogramTable',lowerBounds[index][0],lowerBounds[index][2],index);
-        }
-        insertNewBoundRow('boundTable',lowerBounds[index][0],lowerBounds[index][1],index);
-    }
+function getMaxVal() {
+  var val = document.getElementById("maxVal");
+  numericCheck(val.value);
+  vals[0] = parseFloat(val.value);
+
+  var length = lengthO(vals[1], vals[0]);
+
+  var A1In = document.getElementById("A1In");
+  A1In.innerText = length;
+
+  overlapCheck();
 }
 
+function getA1Val() {
+  var val = document.getElementById("A1Val");
+  numericCheck(val.value);
+  vals[1] = parseFloat(val.value);
 
-setTimeout(()=>{ init();}, 1);
+  var length = lengthO(vals[1], vals[0]);
+  var length2 = lengthO(vals[2], vals[1]);
+
+  var A1In = document.getElementById("A1In");
+  A1In.innerText = length;
+
+  var A2In = document.getElementById("A2In");
+  A2In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getA2Val() {
+  var val = document.getElementById("A2Val");
+  numericCheck(val.value);
+  vals[2] = parseFloat(val.value);
+
+  var length = lengthO(vals[2], vals[1]);
+  var length2 = lengthO(vals[3], vals[2]);
+
+  var A2In = document.getElementById("A2In");
+  A2In.innerText = length;
+
+  var A3In = document.getElementById("A3In");
+  A3In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getA3Val() {
+  var val = document.getElementById("A3Val");
+  numericCheck(val.value);
+  vals[3] = parseFloat(val.value);
+
+  var length = lengthO(vals[3], vals[2]);
+  var length2 = lengthO(vals[4], vals[3]);
+
+  var A3In = document.getElementById("A3In");
+  A3In.innerText = length;
+
+  var B1In = document.getElementById("B1In");
+  B1In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getB1Val() {
+  var val = document.getElementById("B1Val");
+  numericCheck(val.value);
+  vals[4] = parseFloat(val.value);
+
+  var length = lengthO(vals[4], vals[3]);
+  var length2 = lengthO(vals[5], vals[4]);
+
+  var B1In = document.getElementById("B1In");
+  B1In.innerText = length;
+
+  var B2In = document.getElementById("B2In");
+  B2In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getB2Val() {
+  var val = document.getElementById("B2Val");
+  numericCheck(val.value);
+  vals[5] = parseFloat(val.value);
+
+  var length = lengthO(vals[5], vals[4]);
+  var length2 = lengthO(vals[6], vals[5]);
+
+  var B2In = document.getElementById("B2In");
+  B2In.innerText = length;
+
+  var B3In = document.getElementById("B3In");
+  B3In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getB3Val() {
+  var val = document.getElementById("B3Val");
+  numericCheck(val.value);
+  vals[6] = parseFloat(val.value);
+
+  var length = lengthO(vals[6], vals[5]);
+  var length2 = lengthO(vals[7], vals[6]);
+
+  var B3In = document.getElementById("B3In");
+  B3In.innerText = length;
+
+  var C1In = document.getElementById("C1In");
+  C1In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getC1Val() {
+  var val = document.getElementById("C1Val");
+  numericCheck(val.value);
+  vals[7] = parseFloat(val.value);
+
+  var length = lengthO(vals[7], vals[6]);
+  var length2 = lengthO(vals[8], vals[7]);
+
+  var C1In = document.getElementById("C1In");
+  C1In.innerText = length;
+
+  var C2In = document.getElementById("C2In");
+  C2In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getC2Val() {
+  var val = document.getElementById("C2Val");
+  numericCheck(val.value);
+  vals[8] = parseFloat(val.value);
+
+  var length = lengthO(vals[8], vals[7]);
+  var length2 = lengthO(vals[9], vals[8]);
+
+  var C2In = document.getElementById("C2In");
+  C2In.innerText = length;
+
+  var C3In = document.getElementById("C3In");
+  C3In.innerText = length2;
+
+  overlapCheck();
+}
+
+function getC3Val() {
+  var val = document.getElementById("C3Val");
+  numericCheck(val.value);
+  vals[9] = parseFloat(val.value);
+
+  var length = lengthO(vals[9], vals[8]);
+  var length2 = lengthO(vals[10], vals[9]);
+
+  var C3In = document.getElementById("C3In");
+  C3In.innerText = length;
+
+  var DIn = document.getElementById("DIn");
+  DIn.innerText = length2;
+
+  overlapCheck();
+}
+
+function getDVal() {
+  var val = document.getElementById("DVal");
+  numericCheck(val.value);
+  vals[10] = parseFloat(val.value);
+
+  var length = lengthO(vals[10], vals[9]);
+  var length2 = lengthO(vals[11], vals[10]);
+
+  var DIn = document.getElementById("DIn");
+  DIn.innerText = length;
+
+  var FIn = document.getElementById("FIn");
+  FIn.innerText = length2;
+
+  overlapCheck();
+}
+
+function getFVal() {
+  var val = document.getElementById("FVal");
+  numericCheck(val.value);
+  vals[11] = parseFloat(val.value);
+
+  var length = lengthO(vals[11], vals[10]);
+
+  var FIn = document.getElementById("FIn");
+  FIn.innerText = length;
+
+  overlapCheck();
+}
+
+function setGrades() {
+}
