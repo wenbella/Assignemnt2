@@ -6,8 +6,8 @@ body{
 div#main{
   min-height: 100%;
   width: 1000px;
-  margin-left:auto;
-  margin-right: auto;
+  margin-left:10;
+  margin-right: 10;
   padding-top: 30px;
   padding-bottom: 150px;
   background-color: white;
@@ -55,7 +55,7 @@ td#lbb {
 }
 td#h {
   vertical-align: center;
-  padding-left: 45px;
+  padding-left: 30px;
   padding-right: 30px;
   padding-top: 7px;
   padding-bottom: 7px;
