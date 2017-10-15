@@ -1,8 +1,9 @@
 <div id="listing">
-<h1>Editing Courses</h1>
+<h1>Editing Course</h1>
+<div id="table">
+  <%= render 'form' %>
+</div>
 <br>
-<%= render 'form' %>
-<br>
-<%= link_to 'Show', @enroll %> |
-<%= link_to 'Back', enrolls_path %>
+<%= link_to 'Show', @course %> |
+<%= link_to 'Back', courses_path %>
 </div>

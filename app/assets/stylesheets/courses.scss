@@ -34,9 +34,11 @@ div#ag{
 }
 p#name{
   font-size: 24px;
+  // color : #DC143C;
 }
 p#desc{
   font-size: 16px;
+  // color : #DC143C;
 }
 table{
   border-width: 1px;
@@ -60,5 +62,7 @@ th{
   border-color: black;
   border-style: solid;
   padding: 10px;
+  background-color:#E6F9FA;
   vertical-align: top;
+  color:blue;
 }

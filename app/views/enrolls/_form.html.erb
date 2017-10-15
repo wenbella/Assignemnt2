@@ -11,23 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.number_field :student_id %>
-  </div>
-  <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.text_field :course_id %>
-  </div>
-  <div class="field">
-    <%= f.label :percentage %><br>
-    <%= f.text_field :percentage %>
-  </div>
-  <div class="field">
-    <%= f.label :lettergrade %><br>
-    <%= f.text_field :lettergrade %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <table>
+     <tr>
+       <td id="fields">
+         <div class="field">
+           <%= f.label :student_id %> <b>ID</b><br>
+           <%= f.text_field :student_id %>
+         </div>
+         <div class="field">
+           <%= f.label :course_id %><br>
+           <%= f.text_field :course_id %>
+         </div>
+         <div class="field">
+           <%= f.label :percentage %><br>
+           <%= f.text_field :percentage %>
+         </div>
+         <div class="field">
+           <b>Letter Grade</b> <br>
+           <%= f.text_field :lettergrade %>
+         </div>
+       </td>
+     </tr>
+     <tr>
+       <td id="links">
+         <div class="actions">
+           <%= f.submit %>
+         </div>
+       </td>
+     </tr>
+   </table>
+ <% end %>

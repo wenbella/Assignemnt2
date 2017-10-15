@@ -11,19 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.text_field :student_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <table>
+     <tr>
+       <td id="fields">
+         <div class="field">
+           <%= f.label :student_id %> <b>ID</b><br>
+           <%= f.text_field :student_id %>
+         </div>
+         <div class="field">
+           <%= f.label :name %><br>
+           <%= f.text_field :name %>
+         </div>
+         <div class="field">
+           <%= f.label :email %><br>
+           <%= f.text_field :email %>
+         </div>
+       </td>
+     </tr>
+     <tr>
+       <td id="links">
+         <div class="actions">
+           <%= f.submit %>
+         </div>
+       </td>
+     </tr>
+   </table>
+ <% end %>

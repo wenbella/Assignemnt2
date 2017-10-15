@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
   end
-  def his#change name
+  def his
     @find2 = Enroll.where(course_id: @course.course_id)
     $enkey = []
     @perct = []
@@ -70,6 +70,7 @@ class CoursesController < ApplicationController
   end
 
   def grdup
+    #change grade
     k = 0
     puts "start"
     puts {@cnt}
