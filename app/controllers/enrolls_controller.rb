@@ -7,8 +7,8 @@ class EnrollsController < ApplicationController
     @enrolls = Enroll.all
   end
 
-  # GET /enrolls/1
-  # GET /enrolls/1.json
+  # GET /enrolls/2
+  # GET /enrolls/2.json
   def show
     @enroll = Enroll.find(params[:id])
   end
@@ -18,7 +18,7 @@ class EnrollsController < ApplicationController
     @enroll = Enroll.new
   end
 
-  # GET /enrolls/1/edit
+  # GET /enrolls/2/edit
   def edit
   end
 

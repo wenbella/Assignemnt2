@@ -1,36 +1,50 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_his, only: [:his]
 
   # GET /courses
   # GET /courses.json
+
   def index
     @courses = Course.all
   end
+  def his#change name
+    @find2 = Enroll.where(course_id: @course.course_id)
+    $enkey = []
+    @perct = []
+    @letgd = []
+    @cnt = 0
+    @find2.each do |fi|
+       @perct[@cnt] = fi.percentage
+       $enkey[@cnt] = fi.id
+       @letgd[@cnt] = fi.lettergrade
+       @cnt = @cnt + 1
+    end
 
+    gon.myarr = @perct
+    gon.mykey = $enkey
+    gon.letgd = @letgd
+    gon.mycnt = @cnt
+    @enroll = Enroll.new
+    @cnt = 0
+  end
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @enrolls = Enroll.where(course_id: @course.course_id)
-    @eGrades = []
-    @enrolls.each do|enroll|
-      @eGrades << enroll.percentage
-    end
+    @find1 = Enroll.where(course_id: @course.course_id)
   end
 
   # GET /courses/new
   def new
     @course = Course.new
   end
-
   # GET /courses/1/edit
   def edit
   end
-
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -41,7 +55,6 @@ class CoursesController < ApplicationController
       end
     end
   end
-
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
@@ -56,6 +69,29 @@ class CoursesController < ApplicationController
     end
   end
 
+  def grdup
+    k = 0
+    puts "start"
+    puts {@cnt}
+
+    respond_to do |format|
+       i = 0;
+       mkey = 0;
+       params[:data_value].each do |fval |
+        puts fval
+          mkey = $enkey[i]
+          @enroll = Enroll.find(mkey)
+          @enroll.update(lettergrade: fval)
+          i = i + 1;
+       end
+       puts "end"
+
+       format.json { render nothing: true }
+
+    end
+
+
+  end
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
@@ -65,15 +101,22 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
     end
-
+    def set_his
+      @course = Course.find(params[:course_id])
+    end
+    def set_enroll
+      @enroll = Enroll.find(params[:id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
+    def enroll_params
+      params.require(:enroll).permit(:lettergrade)
+    end
     def course_params
-      params.require(:course).permit(:course_id, :description)
+      params.require(:course).permit(:description)
     end
 end
