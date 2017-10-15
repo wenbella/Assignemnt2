@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post "course/grdup" => 'courses#grdup'
   resources :enrolls
   resources :courses do
-    get "his"
+    get "myapp"
   end
 
   resources :students

@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-  before_action :set_his, only: [:his]
+  before_action :set_myapp, only: [:myapp]
 
   # GET /courses
   # GET /courses.json
@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
   end
-  def his
+  def myapp
     @find2 = Enroll.where(course_id: @course.course_id)
     $enkey = []
     @perct = []
@@ -106,7 +106,7 @@ class CoursesController < ApplicationController
     def set_course
       @course = Course.find(params[:id])
     end
-    def set_his
+    def set_myapp
       @course = Course.find(params[:course_id])
     end
     # Never trust parameters from the scary internet, only allow the white list through.
