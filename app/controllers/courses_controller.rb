@@ -70,7 +70,6 @@ class CoursesController < ApplicationController
   end
 
   def grdup
-    #change grade
     k = 0
     puts "start"
     puts {@cnt}
@@ -110,14 +109,8 @@ class CoursesController < ApplicationController
     def set_his
       @course = Course.find(params[:course_id])
     end
-    def set_enroll
-      @enroll = Enroll.find(params[:id])
-    end
     # Never trust parameters from the scary internet, only allow the white list through.
-    def enroll_params
-      params.require(:enroll).permit(:lettergrade)
-    end
     def course_params
-      params.require(:course).permit(:description)
+      params.require(:course).permit(:course_id,:description)
     end
 end

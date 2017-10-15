@@ -34,7 +34,7 @@ gem 'puma'
 
 gem 'gon'
 
-# gem 'validates_email_format_of'
+gem 'validates_email_format_of'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

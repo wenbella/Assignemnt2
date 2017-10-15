@@ -2,10 +2,9 @@ Rails.application.routes.draw do
   root    'welcome#index'
   post "course/grdup" => 'courses#grdup'
   resources :enrolls
-   resources :courses
-  # resources :courses do
-  #   get "his"
-  # end
+  resources :courses do
+    get "his"
+  end
 
   resources :students
   resources :posts
