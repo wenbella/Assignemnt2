@@ -8,26 +8,6 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
   end
-  def myapp
-    @find2 = Enroll.where(course_id: @course.course_id)
-    $enkey = []
-    @perct = []
-    @letgd = []
-    @cnt = 0
-    @find2.each do |fi|
-       @perct[@cnt] = fi.percentage
-       $enkey[@cnt] = fi.id
-       @letgd[@cnt] = fi.lettergrade
-       @cnt = @cnt + 1
-    end
-
-    gon.myarr = @perct
-    gon.mykey = $enkey
-    gon.letgd = @letgd
-    gon.mycnt = @cnt
-    @enroll = Enroll.new
-    @cnt = 0
-  end
   # GET /courses/1
   # GET /courses/1.json
   def show
@@ -67,6 +47,27 @@ class CoursesController < ApplicationController
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def myapp
+    @find2 = Enroll.where(course_id: @course.course_id)
+    $enkey = []
+    @perct = []
+    @letgd = []
+    @cnt = 0
+    @find2.each do |fi|
+       @perct[@cnt] = fi.percentage
+       $enkey[@cnt] = fi.id
+       @letgd[@cnt] = fi.lettergrade
+       @cnt = @cnt + 1
+    end
+
+    gon.myarr = @perct
+    gon.mykey = $enkey
+    gon.letgd = @letgd
+    gon.mycnt = @cnt
+    @enroll = Enroll.new
+    @cnt = 0
   end
 
   def grdup

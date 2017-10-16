@@ -6,84 +6,72 @@
   <h1> Histogram Generator </h1> </br>
 </head>
 
-<script>
-    var agent = navigator.userAgent.toLowerCase();
-    function gradeConfirm(){
-      $.ajax({
-      type : 'POST',
-      url : '/course/grdup',
-      contentType: "application/json; charset=utf-8",
-      dataType: 'json',
-      data : JSON.stringify({data_value: letgd}),
-
-      success: function(data) {
-        alert("You got student's grade!")
-            if(agent.indexOf("chrome") != -1){
-      window.history.go(-2);
-    }
-    else{
-    window.history.go(-1);
-  }
-      },
-      error: function(request,status,error) {
-        alert("You got student's grade!!")
-    if(agent.indexOf("chrome") != -1){
-      window.history.go(-2);
-    }
-    else{
-    window.history.go(-1);
-  }
-      }
-    });
-    }
-  </script>
-<div class="wrapper">
-<button onclick="gradeConfirm();return false;">Submit</button>
-</div>
-  <div class="boxed1">
-        <p class="type01" margin-left=10px>  Lower bounds </p>
+<div class="lowlevel">
+        <bold class="title">Lower bounds</bold>
         <form action="" method="post">
         <h2>
-        <label class="h"> Max </label> <input type="text" name="number" value="100.00" placeholder="100.00" onKeyDown="checkInp(event)"  maxlength="6" id="max"/></br>
-    </h2>
-      <h2>
-        <label class="h">A+</label>   <input type="text" name="number" value="95.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A+"/></br>
-    </h2>
-        <h2>
-        <label class="h">A </label>   <input type="text" name="number"  value="90.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A"/></br>
+        <label class="h"> Max </label>
+        <input type="text" name="number" value="100.00"
+        placeholder="100.00" onKeyDown="checkInp(event)"  maxlength="6" id="max"/></br>
         </h2>
-
         <h2>
-        <label class="h">A-</label>   <input type="text" name="number" value="85.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A-"/></br>
-    </h2>
+        <label class="h">A+</label>
+        <input type="text" name="number" value="95.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A+"/></br>
+        </h2>
         <h2>
-        <label class="h">B+</label>   <input type="text" name="number" value="80.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B+"/></br>
-    </h2>
+        <label class="h">A </label>
+        <input type="text" name="number"  value="90.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A"/></br>
+        </h2>
         <h2>
-        <label class="h">B</label>   <input type="text" name="number" value="75.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B"/></br>
-    </h2>
+        <label class="h">A-</label>
+        <input type="text" name="number" value="85.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="A-"/></br>
+        </h2>
         <h2>
-        <label class="h">B-</label>  <input type="text" name="number" value="70.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B-"/></br>
-    </h2>
+        <label class="h">B+</label>
+        <input type="text" name="number" value="80.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B+"/></br>
+        </h2>
         <h2>
-        <label class="h">C+</label>  <input type="text" name="number" value="65.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C+"/></br>
-    </h2>
+        <label class="h">B</label>
+        <input type="text" name="number" value="75.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B"/></br>
+        </h2>
         <h2>
-        <label class="h">C</label>   <input type="text" name="number" value="60.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C"/></br>
-    </h2>
+        <label class="h">B-</label>
+        <input type="text" name="number" value="70.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="B-"/></br>
+        </h2>
         <h2>
-        <label class="h">C-</label> <input type="text" name="number" value="55.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C-"/></br>
-      </h2>
-
+        <label class="h">C+</label>
+        <input type="text" name="number" value="65.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C+"/></br>
+        </h2>
         <h2>
-        <label class="h">D</label> <input type="text" name="number" value="50.00" placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="D"/></br>
-      </h2>
+        <label class="h">C</label>
+        <input type="text" name="number" value="60.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C"/></br>
+        </h2>
         <h2>
-        <label class="h">F</label> <input type="text" name="number" value="0.00" onKeyDown="checkInp(event)" maxlength="5" id="F"/></br>
-    </h2>
+        <label class="h">C-</label>
+        <input type="text" name="number" value="55.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="C-"/></br>
+        </h2>
+        <h2>
+        <label class="h">D</label>
+        <input type="text" name="number" value="50.00"
+        placeholder="00.00" onKeyDown="checkInp(event)" maxlength="5" id="D"/></br>
+        </h2>
+        <h2>
+        <label class="h">F</label>
+        <input type="text" name="number" value="0.00"
+        onKeyDown="checkInp(event)" maxlength="5" id="F"/></br>
+        </h2>
   </div>
-  <div class="boxed2" style="margin-left: 500px">
-    <p class="type01"> Histogram </p>
+  <div class="histogramdiv" style="margin-left: 500px">
+    <bold class="title">Histogram</bold>
     <h3>
         <label class="h">A+</label><div class="text" id="ap" ></div>
     </h3>
@@ -121,93 +109,11 @@
     </form>
   </div>
 
+
 <%= javascript_include_tag "grade.js" %>
   <script>
-  function ge(){
-
-    var ap = document.getElementById("ap");
-    var an = document.getElementById("an");
-    var am = document.getElementById("am");
-    var bp = document.getElementById("bp");
-    var bn = document.getElementById("bn");
-    var bm = document.getElementById("bm");
-    var cp = document.getElementById("cp");
-    var cn = document.getElementById("cn");
-    var cm = document.getElementById("cm");
-    var dn = document.getElementById("dn");
-    var fn = document.getElementById("fn");
-    ap.innerHTML = ""
-    an.innerHTML = "";
-    am.innerHTML = "";
-    bp.innerHTML = "";
-    bn.innerHTML = "";
-    bm.innerHTML = "";
-    cp.innerHTML = "";
-    cn.innerHTML = "";
-    cm.innerHTML = "";
-    dn.innerHTML = "";
-    fn.innerHTML = "";
-
-
-    if (count[0] > 0) {
-      for(i=0;i<count[0];i++){
-          ap.innerHTML+= "O"
-      }
-    }
-
-    if (count[1] > 0) {
-      for(i=0;i<count[1];i++){
-          an.innerHTML+= "O"
-      }
-    }
-    if (count[2] > 0) {
-      for(i=0;i<count[2];i++){
-          am.innerHTML+= "O"
-      }
-    }
-    if (count[3] > 0) {
-      for(i=0;i<count[3];i++){
-          bp.innerHTML+= 'O'
-      }
-    }
-    if (count[4] > 0) {
-      for(i=0;i<count[4];i++){
-          bn.innerHTML+= 'O'
-      }
-    }
-    if (count[5] > 0) {
-      for(i=0;i<count[5];i++){
-          bm.innerHTML+= 'O'
-      }
-    }
-    if (count[6] > 0) {
-      for(i=0;i<count[6];i++){
-          cp.innerHTML += 'O'
-      }
-    }
-    if (count[7] > 0) {
-      for(i=0;i<count[7];i++){
-          cn.innerHTML += 'O'
-      }
-    }
-    if (count[8] > 0) {
-      for(i=0;i<count[8];i++){
-          cm.innerHTML += 'O'
-      }
-    }
-    if (count[9] > 0) {
-      for(i=0;i<count[9];i++){
-          dn.innerHTML += 'O'
-      }
-    }
-    if (count[10] > 0) {
-      for(i=0;i<count[9];i++){
-          fn.innerHTML += 'O'
-      }
-    }
-  };
+  
   onchange=function(){
-
   he();
   ge();
   };
@@ -215,5 +121,38 @@
   </script>
   <br>
 </script>
+<script>
+    var agent = navigator.userAgent.toLowerCase();
+    function gradeConfirm(){
+      $.ajax({
+      type : 'POST',
+      url : '/course/grdup',
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      data : JSON.stringify({data_value: letgd}),
+      success: function(data) {
+        alert("You got student's grade!")
+            if(agent.indexOf("chrome") != -1){
+      window.history.go(-2);
+    }
+    else{
+    window.history.go(-1);
+  }
+      },
+      error: function(request,status,error) {
+        alert("You got student's grade!!")
+    if(agent.indexOf("chrome") != -1){
+      window.history.go(-2);
+    }
+    else{
+    window.history.go(-1);
+  }
+      }
+    });
+    }
+  </script>
+<div class="wrapper">
+<button onclick="gradeConfirm();return false;">Submit</button>
+</div>
 <br>
 </html>

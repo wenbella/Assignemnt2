@@ -6,6 +6,7 @@ var letgd=[];
 for(i=0;i < gon.mycnt; i++)	{
 	grades[i] = gon.myarr[i];
 }
+
 var he=function(){
 
 	range[0]= parseFloat(document.getElementById("max").value);
@@ -70,5 +71,84 @@ var lt=["A+", "A","A-" ,"B+" ,"B" ,"B-" ,"C+" ,"C" ,"C-" ,"D" ,"F"];
             }
           }
         }
+};
+function ge(){
+	var ap = document.getElementById("ap");
+	var an = document.getElementById("an");
+	var am = document.getElementById("am");
+	var bp = document.getElementById("bp");
+	var bn = document.getElementById("bn");
+	var bm = document.getElementById("bm");
+	var cp = document.getElementById("cp");
+	var cn = document.getElementById("cn");
+	var cm = document.getElementById("cm");
+	var dn = document.getElementById("dn");
+	var fn = document.getElementById("fn");
+	ap.innerHTML = ""
+	an.innerHTML = "";
+	am.innerHTML = "";
+	bp.innerHTML = "";
+	bn.innerHTML = "";
+	bm.innerHTML = "";
+	cp.innerHTML = "";
+	cn.innerHTML = "";
+	cm.innerHTML = "";
+	dn.innerHTML = "";
+	fn.innerHTML = "";
+	if (count[0] > 0) {
+		for(i=0;i<count[0];i++){
+				ap.innerHTML+= "O"
+		}
+	}
+	if (count[1] > 0) {
+		for(i=0;i<count[1];i++){
+				an.innerHTML+= "O"
+		}
+	}
+	if (count[2] > 0) {
+		for(i=0;i<count[2];i++){
+				am.innerHTML+= "O"
+		}
+	}
+	if (count[3] > 0) {
+		for(i=0;i<count[3];i++){
+				bp.innerHTML+= 'O'
+		}
+	}
+	if (count[4] > 0) {
+		for(i=0;i<count[4];i++){
+				bn.innerHTML+= 'O'
+		}
+	}
+	if (count[5] > 0) {
+		for(i=0;i<count[5];i++){
+				bm.innerHTML+= 'O'
+		}
+	}
+	if (count[6] > 0) {
+		for(i=0;i<count[6];i++){
+				cp.innerHTML += 'O'
+		}
+	}
+	if (count[7] > 0) {
+		for(i=0;i<count[7];i++){
+				cn.innerHTML += 'O'
+		}
+	}
+	if (count[8] > 0) {
+		for(i=0;i<count[8];i++){
+				cm.innerHTML += 'O'
+		}
+	}
+	if (count[9] > 0) {
+		for(i=0;i<count[9];i++){
+				dn.innerHTML += 'O'
+		}
+	}
+	if (count[10] > 0) {
+		for(i=0;i<count[9];i++){
+				fn.innerHTML += 'O'
+		}
+	}
 };
 he();
