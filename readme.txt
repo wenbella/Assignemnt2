@@ -1,1 +1,2 @@
-This project is for students enrollment system which used for users view his/her course and his/her grade for this course.
+This project is for building student enrollment system which is used to view users' courses and their grades for specific course.
+
